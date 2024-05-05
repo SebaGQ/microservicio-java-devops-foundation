@@ -5,9 +5,34 @@ on:
 
 jobs:
 
-  build:
+  Checkout:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+  
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java JDK para Maven
+        uses: actions/setup-java@main
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          
+      - name: Compilar Dependencias Maven 
+        run: |
+          mvn package
+
+      - name: Test Unitarios y Reporte Cobertura
+        run: |
+          mvn verify
+
+      - name: Subir Reporte JaCoCo como Artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/index.html
+          
