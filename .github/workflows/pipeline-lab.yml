@@ -128,7 +128,7 @@ jobs:
           POSTMAN_COLLECTION_UID: ${{ secrets.POSTMAN_COLLECTION_UID }}
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
-          newman run https://api.getpostman.com/collections/${env:POSTMAN_COLLECTION_UID}?apikey=${env:POSTMAN_API_KEY} --reporter-htmlextra-export testResults/htmlReport.html
+          newman run https://api.getpostman.com/collections/${env:POSTMAN_COLLECTION_UID}?apikey=${env:POSTMAN_API_KEY} --reporters cli,htmlextra --reporter-htmlextra-export testResults/htmlReport.html
 
       - name: Subir Reportes de Newman como Artefacto
         uses: actions/upload-artifact@v2
