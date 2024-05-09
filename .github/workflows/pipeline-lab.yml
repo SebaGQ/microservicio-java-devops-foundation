@@ -109,3 +109,31 @@ jobs:
         with:
           name: jmeter-report
           path: report/
+
+
+      - name: Instalar Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Instalar Newman, HTMLReporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Crear directorio para resultados de test
+        run: mkdir -p testResults
+        
+      - name: Run Postman Collection
+        env:
+          COLLECTION_UID: ${{ secrets.POSTMAN_COLLECTION_UID }}
+          API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          newman run https://api.getpostman.com/collections/$COLLECTION_UID?apikey=$API_KEY --reporters cli,htmlextra --reporter-htmlextra-export testResults/
+
+      - name: Subir Reportes de Newman como Artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: postman-report
+          path: testResults/
+      
