@@ -129,7 +129,7 @@ jobs:
           COLLECTION_UID: ${{ secrets.POSTMAN_COLLECTION_UID }}
           API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
-          newman run https://api.getpostman.com/collections/$COLLECTION_UID?apikey=$API_KEY --reporters cli,htmlextra --reporter-htmlextra-export testResults/
+          newman run https://api.getpostman.com/collections/$POSTMAN_COLLECTION_UID?apikey=$POSTMAN_API_KEY --reporters cli,htmlextra --reporter-htmlextra-export testResults/
 
       - name: Subir Reportes de Newman como Artefacto
         uses: actions/upload-artifact@v2
