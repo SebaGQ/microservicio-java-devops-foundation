@@ -86,3 +86,32 @@ jobs:
           kubectl apply -f service.yaml
 
       
+  Performance_Test:
+    needs: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Descargar y descomprimir JMeter
+        run: |
+          wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.tgz
+          tar -xzf apache-jmeter-5.4.3.tgz
+          mv apache-jmeter-5.4.3 jmeter
+
+      - name: Ejecutar pruebas de rendimiento con JMeter
+        run: |
+          ./jmeter/bin/jmeter -n -t my_test_plan.jmx -l test_results.jtl -e -o report/
+
+      - name: Subir Reportes de Rendimiento como Artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-report
+          path: report/
