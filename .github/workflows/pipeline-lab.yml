@@ -94,12 +94,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java JDK
-        uses: actions/setup-java@main
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-
       - name: Descargar y descomprimir JMeter
         run: |
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.3.tgz
