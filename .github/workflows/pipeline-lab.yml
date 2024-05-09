@@ -126,8 +126,8 @@ jobs:
         
       - name: Run Postman Collection
         env:
-          COLLECTION_UID: ${{ secrets.POSTMAN_COLLECTION_UID }}
-          API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          POSTMAN_COLLECTION_UID: ${{ secrets.POSTMAN_COLLECTION_UID }}
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
           newman run https://api.getpostman.com/collections/$POSTMAN_COLLECTION_UID?apikey=$POSTMAN_API_KEY --reporters cli,htmlextra --reporter-htmlextra-export testResults/
 
