@@ -20,7 +20,7 @@ jobs:
           
       - name: Compilar Dependencias Maven 
         run: |
-          mvn package
+          mvn clean package
 
       - name: Test Unitarios y Reporte Cobertura
         run: |
@@ -118,8 +118,7 @@ jobs:
 
       - name: Instalar Newman, HTMLReporter
         run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
+          npm install -g newman newman-reporter-htmlextra
 
       - name: Crear directorio para resultados de test
         run: mkdir -p testResults
@@ -135,5 +134,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: postman-report
-          path: testResults/
+          path: testResults/htmlReport.html
       
