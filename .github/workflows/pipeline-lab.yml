@@ -86,9 +86,9 @@ jobs:
           kubectl apply -f service.yaml
 
       
-  Performance_Test:
+  Test:
     needs: Deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout
