@@ -102,7 +102,7 @@ jobs:
 
       - name: Ejecutar pruebas de rendimiento con JMeter
         run: |
-          ./jmeter/bin/jmeter -n -t my_test_plan.jmx -l test_results.jtl -e -o report/
+          jmeter\bin\jmeter.bat -n -t my_test_plan.jmx -l test_results.jtl -e -o report\
 
       - name: Subir Reportes de Rendimiento como Artefacto
         uses: actions/upload-artifact@v2
