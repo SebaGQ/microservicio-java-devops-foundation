@@ -20,7 +20,7 @@ jobs:
           
       - name: Compilar Dependencias Maven 
         run: |
-          mvn clean package
+          mvn package
 
       - name: Test Unitarios y Reporte Cobertura
         run: |
